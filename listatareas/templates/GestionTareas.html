@@ -1,0 +1,63 @@
+{%  extends "./base.html" %}
+
+{% block title %}GESTION TAREAS{%endblock%}
+{%  block body %}
+    <div class="row">
+        <div class="col-md-6 col-lg-4 col-xl-4 col-sm-12">
+            <h3>GESTION TAREAS</h3>
+            <div class="card ">
+                <div class="card-body">
+                    <form action="registrarCurso/" method="post">
+                        {% csrf_token %}
+                        <div class="form-group py-2">
+                            <input type="text" id="txtTitulo" name="txtTitulo" class="form-control" placeholder="Titulo" maxlength="100" required>
+                        </div>
+                        <div class="form-group py-2">
+                            <textarea class="form-control" rows="4" name="txtareaDescripcion" id="txtareaDescripcion" required placeholder="Descripcion" maxlength="100"></textarea>
+                        </div>
+                        <div class="form-group py-2">
+                            <input type="date" id="date" name="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block text-white">GUARDAR</button>
+                        </div>
+                    </form>
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-md-6 col-lg-8 col-xl-8 col-sm-12">
+            <h3>LISTA DE CURSOS</h3>
+            <div class="table-responsive py-4">
+                
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>TITULO</th>
+                            <th>DESCRIPCION</th>
+                            <th>FECHA</th>
+                            <th colspan="1">OPCIONES</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in tareas %}
+                        <tr>
+                            <td>{{t.titulo}}</td>
+                            <td>{{t.descripcion}}</td>
+                            <td>{{t.fecha}}</td>
+                            <td><a href="EliminarTarea/{{t.codigo}}" class="btn btn-danger">ELIMINAR</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+{%  endblock %}
